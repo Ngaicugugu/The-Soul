@@ -14,14 +14,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashSpeed;
     [SerializeField] private float distanceBetweenImages;
     [SerializeField] private float dashCooldown;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float jumpForce;
 
     private bool isAttacking = false;
+    private bool isAirAttacking = false;
     private float horizontalInput;
-    [SerializeField] private float facingDirection=1;
     private bool isDashing;
     private bool canMove;
-
-
+    private bool isGrounded;
+    private float facingDirection=1;
     private float dashTimeLeft;
     private float lastImageXpos;
     private float lastDash= -100f;
@@ -29,10 +31,14 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer sprite;
     private Animator myAnim;
     private Rigidbody2D rb;
+    
 
     public Animator MyAnim => myAnim;
 
     public bool IsAttacking { get => isAttacking; set => isAttacking = value; }
+
+    public bool IsGrounded { get => isGrounded; set => isGrounded = value; }
+    public bool IsAirAttacking { get => isAirAttacking; set => isAirAttacking = value; }
 
     private void Awake()
     {
@@ -54,11 +60,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        AirAttack();
         Attack();
         if (canMove)
         {
             MovePlayer();
         }
+        GroundCheck();
+        Jump();
         AnimationController();
         CheckDash();
         Dashing();
@@ -69,6 +78,15 @@ public class PlayerController : MonoBehaviour
        if( Input.GetMouseButtonDown(0) && !IsAttacking)
         {
             IsAttacking = true;
+        }
+    }
+
+    private void AirAttack()
+    {
+        if (Input.GetMouseButtonDown(0) && !isAirAttacking && !isGrounded)
+        {
+            isAirAttacking = true;
+            rb.AddForce(Vector2.down * 6,ForceMode2D.Impulse);
         }
     }
 
@@ -88,7 +106,10 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            AttemptToDash();
+            if(Time.time >= (lastDash + dashCooldown))
+            {
+                AttemptToDash();
+            }
         }
     }
 
@@ -144,5 +165,21 @@ public class PlayerController : MonoBehaviour
     private void AnimationController()
     {
         myAnim.SetFloat("move_speed", Mathf.Abs(horizontalInput));
+        myAnim.SetFloat("vertical_velocity", rb.velocity.y);
+        myAnim.SetBool("is_grounded", isGrounded);
+    }
+
+    private void GroundCheck()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
+        isGrounded = hit.collider != null;
+    }
+
+    private void Jump()
+    {
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
     }
 }
