@@ -359,7 +359,8 @@ GameObject:
   - component: {fileID: 865666106}
   - component: {fileID: 865666105}
   - component: {fileID: 865666107}
-  m_Layer: 0
+  - component: {fileID: 865666108}
+  m_Layer: 8
   m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,7 +448,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 865666101}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.07, y: -0.45, z: 0}
+  m_LocalPosition: {x: 4.07, y: -0.78, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -540,6 +541,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1135972954}
   isFlipped: 0
+--- !u!114 &865666108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865666101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79b1cab52840ad94aa587342b9087a9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 20
+  attackOffset: {x: -1.8, y: -0.4, z: 0}
+  attackRange: 1
+  attackMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1135972951
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,7 +573,8 @@ GameObject:
   - component: {fileID: 1135972956}
   - component: {fileID: 1135972955}
   - component: {fileID: 1135972957}
-  m_Layer: 0
+  - component: {fileID: 1135972958}
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -642,7 +662,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1135972951}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.688, z: 0}
+  m_LocalPosition: {x: 1.57, y: -1.688, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -714,6 +734,7 @@ MonoBehaviour:
   dashCooldown: 1.5
   groundCheck: {fileID: 2104726611}
   jumpForce: 5.55
+  state: 0
 --- !u!50 &1135972957
 Rigidbody2D:
   serializedVersion: 4
@@ -741,6 +762,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1135972958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135972951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 654d06b4228621c4a85a72a1c78b4822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!1 &2104726610
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,7 +784,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2104726611}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -27,11 +27,14 @@ public class PlayerController : MonoBehaviour
     private float dashTimeLeft;
     private float lastImageXpos;
     private float lastDash= -100f;
+    private bool layersIgnored = false;
 
     private SpriteRenderer sprite;
     private Animator myAnim;
     private Rigidbody2D rb;
-    
+
+    public State state;
+
 
     public Animator MyAnim => myAnim;
 
@@ -60,17 +63,27 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        AirAttack();
-        Attack();
-        if (canMove)
+        switch (state)
         {
-            MovePlayer();
+            case State.Playing:
+                AirAttack();
+                Attack();
+                if (canMove)
+                {
+                    MovePlayer();
+                }
+                GroundCheck();
+                Jump();
+                AnimationController();
+                CheckDash();
+                Dashing();
+                break;
+            case State.GameOver:
+                break;
+
+                
         }
-        GroundCheck();
-        Jump();
-        AnimationController();
-        CheckDash();
-        Dashing();
+
     }
 
     private void Attack()
@@ -121,6 +134,9 @@ public class PlayerController : MonoBehaviour
 
         AfterPool.Instance.GetFromPool();
         lastImageXpos = transform.position.x;
+
+        ToggleLayerCollision();
+
     }
 
     private void CheckDash()
@@ -144,6 +160,7 @@ public class PlayerController : MonoBehaviour
             {
                 isDashing=false;
                 canMove= true;
+                ToggleLayerCollision();
             }
         }
     }
@@ -181,5 +198,31 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
+    }
+
+    public void ToggleLayerCollision()
+    {
+        // Lấy giá trị layer từ tên layer
+        int playerLayer = LayerMask.NameToLayer("Player");
+        int bossLayer = LayerMask.NameToLayer("Boss");
+
+        // Kiểm tra nếu layer tồn tại
+        if (playerLayer == -1 || bossLayer == -1)
+        {
+            Debug.LogError("Player or Boss layer not found.");
+            return;
+        }
+
+        // Đảo ngược trạng thái của va chạm
+        layersIgnored = !layersIgnored;
+        Physics2D.IgnoreLayerCollision(playerLayer, bossLayer, layersIgnored);
+
+    }
+
+    public enum State
+    {
+        Standby,
+        Playing,
+        GameOver
     }
 }

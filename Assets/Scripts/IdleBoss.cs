@@ -7,6 +7,8 @@ public class IdleBoss : StateMachineBehaviour
     public float speed = 2.5f;
     public float attackRange = 3f;
 
+    private int random;
+
     Transform player;
     Rigidbody2D rb;
     Boss boss;
@@ -16,6 +18,9 @@ public class IdleBoss : StateMachineBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = animator.GetComponent<Rigidbody2D>();
         boss = animator.GetComponent<Boss>();
+
+        random = Random.Range(0, 2);
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -27,9 +32,12 @@ public class IdleBoss : StateMachineBehaviour
         Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
         rb.MovePosition(newPos);
 
-        if (Vector2.Distance(player.position, rb.position) <= attackRange)
+        if (Vector2.Distance(player.position, rb.position) <= attackRange && random==0)
         {
             animator.SetTrigger("attack");
+        }else if(Vector2.Distance(player.position, rb.position) <= attackRange && random == 1)
+        {
+            animator.SetTrigger("skill");
         }
     }
 
@@ -37,6 +45,7 @@ public class IdleBoss : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.ResetTrigger("attack");
+        animator.ResetTrigger("skill");
     }
 
 
