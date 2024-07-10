@@ -29,7 +29,6 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         PlayerController.Instance.state = PlayerController.State.GameOver;
-        PlayerController.Instance.ToggleLayerCollision();
         myAnim.SetTrigger("death");
 
     }

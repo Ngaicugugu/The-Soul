@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class BossDamage : MonoBehaviour
 {
     [SerializeField] private int attackDamage = 20;
@@ -9,6 +8,7 @@ public class BossDamage : MonoBehaviour
     [SerializeField] private Vector3 attackOffset;
     [SerializeField] private float attackRange = 1f;
     [SerializeField] private LayerMask attackMask;
+    [SerializeField] private BoxCollider2D hitBoxSkill;
 
     public void Attack()
     {
@@ -23,6 +23,20 @@ public class BossDamage : MonoBehaviour
         }
     }
 
+    public void SkillOn()
+    {
+        hitBoxSkill.gameObject.SetActive(true);
+    }
+
+    public void SkillOff()
+    {
+        hitBoxSkill.gameObject.SetActive(false);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        collision.GetComponent<PlayerHealth>().TakeDamage(attackDamage);   
+    }
 
     void OnDrawGizmosSelected()
     {

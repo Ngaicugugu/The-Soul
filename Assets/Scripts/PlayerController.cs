@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
         myAnim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        state = State.Playing;
         canMove = true;
     }
 
@@ -79,6 +80,7 @@ public class PlayerController : MonoBehaviour
                 Dashing();
                 break;
             case State.GameOver:
+                SetLayerToDefault();
                 break;
 
                 
@@ -217,6 +219,19 @@ public class PlayerController : MonoBehaviour
         layersIgnored = !layersIgnored;
         Physics2D.IgnoreLayerCollision(playerLayer, bossLayer, layersIgnored);
 
+    }
+
+    private void SetLayerToDefault()
+    {
+        int defaultLayer = LayerMask.NameToLayer("Default");
+
+        if (defaultLayer == -1)
+        {
+            Debug.LogError("Default layer not found.");
+            return;
+        }
+
+        gameObject.layer = defaultLayer;
     }
 
     public enum State
