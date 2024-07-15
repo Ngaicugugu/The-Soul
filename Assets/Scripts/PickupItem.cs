@@ -5,23 +5,23 @@ using UnityEngine;
 public class PickupItem : MonoBehaviour
 {
     private Item nearbyItem;
+    private bool isUnlock;
 
     private void Update()
     {
-        if (nearbyItem != null && Input.GetKeyDown(KeyCode.F))
+        if (nearbyItem != null && Input.GetKeyDown(KeyCode.F) && isUnlock)
         {
             CollectItem(nearbyItem);
+        }
+        else if(nearbyItem != null && Input.GetKeyDown(KeyCode.F) && !isUnlock)
+        {
+            Debug.Log("Chua du kinh nghiem");
         }
     }
 
     private void CollectItem(Item item)
     {
-        Debug.Log("Collected item: " + item.Id + " with attack damage: " + item.AttackDamage);
-
         PlayerDamage.Instance.attackDamage = item.AttackDamage;
-
-        // Thêm các hành động khác khi lấy item, ví dụ: tăng chỉ số cho người chơi
-        Destroy(item.gameObject);
         nearbyItem = null;
     }
 
@@ -31,6 +31,7 @@ public class PickupItem : MonoBehaviour
         if (item != null)
         {
             nearbyItem = item;
+            isUnlock = item.IsUnlockExp;
         }
     }
 
@@ -40,6 +41,7 @@ public class PickupItem : MonoBehaviour
         if (item != null && item == nearbyItem)
         {
             nearbyItem = null;
+            
         }
     }
 }

@@ -1,24 +1,31 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 public class PlayerDamage : MonoBehaviour
 {
     public static PlayerDamage Instance;
 
-    [SerializeField] public int attackDamage = 100;
+    [SerializeField] public int attackDamage;
 
     [SerializeField] private Vector3 attackOffset;
     [SerializeField] private float attackRange = 1f;
     [SerializeField] private LayerMask attackMask;
 
+    private bool facingRight = true;
+
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);  // Phá hủy instance trùng lặp
+        }
     }
     public void AttackBoss()
     {
-        Vector3 pos = transform.position;
-        pos += transform.right * attackOffset.x;
-        pos += transform.up * attackOffset.y;
+        Vector3 pos = CalculateAttackPosition();
 
         Collider2D colInfo = Physics2D.OverlapCircle(pos, attackRange, attackMask);
         if (colInfo != null)
@@ -27,13 +34,29 @@ public class PlayerDamage : MonoBehaviour
         }
     }
 
+    private Vector3 CalculateAttackPosition()
+    {
+        Vector3 pos = transform.position;
+        if (facingRight)
+        {
+            pos += transform.right * attackOffset.x;
+        }
+        else
+        {
+            pos -= transform.right * attackOffset.x; // Đảo ngược x nếu quay mặt sang trái
+        }
+        pos += transform.up * attackOffset.y;
+        return pos;
+    }
+
+    public void SetFacingDirection(bool isFacingRight)
+    {
+        facingRight = isFacingRight;
+    }
 
     void OnDrawGizmosSelected()
     {
-        Vector3 pos = transform.position;
-        pos += transform.right * attackOffset.x;
-        pos += transform.up * attackOffset.y;
-
+        Vector3 pos = CalculateAttackPosition();
         Gizmos.DrawWireSphere(pos, attackRange);
     }
 }

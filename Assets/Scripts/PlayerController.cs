@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -33,7 +34,10 @@ public class PlayerController : MonoBehaviour
     private Animator myAnim;
     private Rigidbody2D rb;
 
-    public State state;
+    public int experiencePoints;
+    
+
+    [HideInInspector]public State state;
 
 
     public Animator MyAnim => myAnim;
@@ -58,6 +62,11 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         state = State.Playing;
+        
+    }
+    private void Start()
+    {
+        LoadData();
         canMove = true;
     }
 
@@ -174,10 +183,12 @@ public class PlayerController : MonoBehaviour
         if(sprite.flipX)
         {
             facingDirection = -1;
+            PlayerDamage.Instance.SetFacingDirection(false);
         }
         else
         {
             facingDirection = 1;
+            PlayerDamage.Instance.SetFacingDirection(true);
         }
     }
 
@@ -232,6 +243,29 @@ public class PlayerController : MonoBehaviour
         }
 
         gameObject.layer = defaultLayer;
+    }
+
+    public void GainExperience(int amount)
+    {
+        experiencePoints += amount;
+        // Thêm các hành động khác khi nhận kinh nghiệm, ví dụ: cập nhật UI
+    }
+
+    private void LoadData()
+    {
+        int defaultAttackDamage = 5;
+        int loadedAttackDamage;
+        GameManager.Instance.LoadPlayerData(out experiencePoints, out loadedAttackDamage, defaultAttackDamage);
+
+        if (PlayerDamage.Instance != null)
+        {
+            PlayerDamage.Instance.attackDamage = loadedAttackDamage;
+        }
+    }
+
+    public void SaveData()
+    {
+        GameManager.Instance.SavePlayerData(experiencePoints, PlayerDamage.Instance.attackDamage);
     }
 
     public enum State

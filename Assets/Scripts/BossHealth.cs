@@ -5,6 +5,9 @@ using UnityEngine;
 public class BossHealth : MonoBehaviour
 {
     [SerializeField] private int health = 500;
+    [SerializeField] private GameObject experiencePrefab; // Prefab của kinh nghiệm
+    [SerializeField] private int experienceValue = 1; // Giá trị kinh nghiệm mỗi lần rơi
+    [SerializeField] private GameObject doorPrefab;
 
     private float flashDuration = 0.1f;
 
@@ -25,6 +28,7 @@ public class BossHealth : MonoBehaviour
         health -= damage;
 
         StartCoroutine(FlashRed());
+        SpawnExperience();
 
         if (health <= 0)
         {
@@ -39,6 +43,7 @@ public class BossHealth : MonoBehaviour
             isDead = true;
             myAnim.SetTrigger("death");
             StartCoroutine(DestroyAfterAnimation());
+            ShowDoor();
         }
     }
 
@@ -65,5 +70,27 @@ public class BossHealth : MonoBehaviour
 
         // Hủy GameObject sau khi hoạt ảnh "death" đã hoàn thành
         Destroy(gameObject);
+    }
+
+    private void SpawnExperience()
+    {
+        GameObject exp = Instantiate(experiencePrefab, transform.position, Quaternion.identity);
+        Experience experience = exp.GetComponent<Experience>();
+        if (experience != null)
+        {
+            experience.value = experienceValue;
+            StartCoroutine(AttractExperienceAfterDelay(experience, 1f)); // Delay 1 giây trước khi kinh nghiệm di chuyển về phía người chơi
+        }
+    }
+
+    private IEnumerator AttractExperienceAfterDelay(Experience experience, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        experience.Attract();
+    }
+
+    private void ShowDoor()
+    {
+        Instantiate(doorPrefab, transform.position, Quaternion.identity);
     }
 }

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: item_1
   m_EditorClassIdentifier: 
   id: 1
-  attackDamage: 500
+  attackDamage: 10
   itemImage: {fileID: 21300000, guid: 76cc284069cc07d4e807327623e2e0ce, type: 3}
+  unlockExp: 10
