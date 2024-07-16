@@ -24,6 +24,7 @@ public class PlayerHealth : MonoBehaviour
         if (health <= 0)
         {
             Die();
+            StartCoroutine(DelayScene());
         }
     }
 
@@ -33,6 +34,12 @@ public class PlayerHealth : MonoBehaviour
         myAnim.SetTrigger("death");
 
         PlayerController.Instance.SaveData();
+        
+    }
+
+    private IEnumerator DelayScene()
+    {
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene("MainScene");
     }
 }

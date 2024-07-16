@@ -3,24 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Door : MonoBehaviour
+public class DoorToMain : MonoBehaviour
 {
-    [SerializeField] private string sceneName;
-    [SerializeField] private bool isLocked = false;
-
     private bool isPlayerNear;
 
     private void Update()
     {
-        if (!isLocked && isPlayerNear && Input.GetKeyDown(KeyCode.F))
+        if (isPlayerNear && Input.GetKeyDown(KeyCode.F))
         {
             PlayerController.Instance.SaveData();
-            SceneManager.LoadScene(sceneName);
+            SceneManager.LoadScene("MainScene");
         }
-        else if(isLocked && isPlayerNear && Input.GetKeyDown(KeyCode.F))
-        {
-            Debug.Log("Chua du dieu kien");
-        }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -37,16 +31,5 @@ public class Door : MonoBehaviour
         {
             isPlayerNear = false;
         }
-    }
-
-
-    public void LockDoor()
-    {
-        isLocked = true;
-    }
-
-    public void UnlockDoor()
-    {
-        isLocked = false;
     }
 }

@@ -8,6 +8,7 @@ public class BossHealth : MonoBehaviour
     [SerializeField] private GameObject experiencePrefab; // Prefab của kinh nghiệm
     [SerializeField] private int experienceValue = 1; // Giá trị kinh nghiệm mỗi lần rơi
     [SerializeField] private GameObject doorPrefab;
+    [SerializeField] private int bossNumber;
 
     private float flashDuration = 0.1f;
 
@@ -44,6 +45,7 @@ public class BossHealth : MonoBehaviour
             myAnim.SetTrigger("death");
             StartCoroutine(DestroyAfterAnimation());
             ShowDoor();
+            GameManager.Instance.DefeatBoss(bossNumber);
         }
     }
 

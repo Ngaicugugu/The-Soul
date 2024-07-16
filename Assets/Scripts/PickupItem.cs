@@ -12,6 +12,7 @@ public class PickupItem : MonoBehaviour
         if (nearbyItem != null && Input.GetKeyDown(KeyCode.F) && isUnlock)
         {
             CollectItem(nearbyItem);
+            Debug.Log("Da trang bi");
         }
         else if(nearbyItem != null && Input.GetKeyDown(KeyCode.F) && !isUnlock)
         {
