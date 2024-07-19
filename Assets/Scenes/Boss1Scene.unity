@@ -769,9 +769,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69c2eb151adb3944db4a917c18020726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 500
+  health: 2000
   experiencePrefab: {fileID: 5348376920146368172, guid: 1d1449364104dc84d87e6b3e14a5ac11, type: 3}
-  experienceValue: 5
+  experienceValue: 1
   doorPrefab: {fileID: 4428462990588034481, guid: 183eea5f38e769e438889e9fcab39324, type: 3}
   bossNumber: 1
 --- !u!1 &1135972951
@@ -1005,7 +1005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c00c07a375f01cf4e9dbcf911d9cf2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 10000
+  attackDamage: 1
   attackOffset: {x: 0.66, y: -0.2, z: 0}
   attackRange: 0.55
   attackMask:
@@ -1023,6 +1023,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5137c5e98a56b488cfe78113f405b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  notificationPrefab: {fileID: 0}
+  notificationParent: {fileID: 0}
 --- !u!1 &1713020105
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,8 +16,11 @@ public class idleBehaviour : StateMachineBehaviour
 
         if (PlayerController.Instance.IsAttacking)
         {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.Attack);
             PlayerController.Instance.MyAnim.Play("attack1");
         }
+
+        
 
         if (PlayerController.Instance.IsAirAttacking)
         {

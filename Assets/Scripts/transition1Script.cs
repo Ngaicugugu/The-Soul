@@ -15,6 +15,7 @@ public class transition1Script : StateMachineBehaviour
     {
         if (PlayerController.Instance.IsAttacking)
         {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.Attack);
             PlayerController.Instance.MyAnim.Play("attack2");
         }
     }

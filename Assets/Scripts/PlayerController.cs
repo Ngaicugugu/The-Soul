@@ -119,7 +119,6 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         float movementValue = horizontalInput * speed;
         rb.velocity = new Vector2 (movementValue, rb.velocity.y);
-
         if(horizontalInput != 0)
         {
             FaceFlix();
@@ -142,6 +141,8 @@ public class PlayerController : MonoBehaviour
         isDashing = true;
         dashTimeLeft = dashTime;
         lastDash = Time.time;
+
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.Slash);
 
         AfterPool.Instance.GetFromPool();
         lastImageXpos = transform.position.x;
