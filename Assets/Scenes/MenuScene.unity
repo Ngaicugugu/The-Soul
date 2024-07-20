@@ -18445,10 +18445,9 @@ MonoBehaviour:
   musicSource: {fileID: 191172125}
   sFXSource: {fileID: 42324807}
   Background1: {fileID: 8300000, guid: baa321096ed7da14ea4e5e6373963301, type: 3}
-  Background2: {fileID: 0}
+  Background2: {fileID: 8300000, guid: de1ecec0b84ba3c418d99cfb922e86af, type: 3}
   Attack: {fileID: 8300000, guid: cf9c98970059efb45a645234da73e6ef, type: 3}
   FootStep: {fileID: 8300000, guid: f65c4ff197551410b9f70b804410c961, type: 3}
-  Death: {fileID: 0}
   PickUp: {fileID: 8300000, guid: b7db7ff580d9848ed8f011953f466b66, type: 3}
   Slash: {fileID: 8300000, guid: 33e2354fd91aafe4fb201cb5bd7b8da3, type: 3}
 --- !u!4 &1120765685
@@ -18914,6 +18913,50 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54d9051e4ec3361429055f7bbdc2fb29, type: 3}
+--- !u!1 &1304964593
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1304964595}
+  - component: {fileID: 1304964594}
+  m_Layer: 0
+  m_Name: SceneMusic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1304964594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304964593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12c09d82703df7458010d13bf0f7d1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1304964595
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304964593}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.501852, y: 0.8649998, z: -8.45}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1312193678
 GameObject:
   m_ObjectHideFlags: 0

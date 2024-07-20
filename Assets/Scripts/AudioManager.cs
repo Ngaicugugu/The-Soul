@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -13,7 +14,6 @@ public class AudioManager : MonoBehaviour
     public AudioClip Background2;
     public AudioClip Attack;
     public AudioClip FootStep;
-    public AudioClip Death;
     public AudioClip PickUp;
     public AudioClip Slash;
 
@@ -39,6 +39,12 @@ public class AudioManager : MonoBehaviour
     public void PlaySFX(AudioClip clip)
     {
         sFXSource.PlayOneShot(clip);
+    }
+
+    public void PlayMusic(AudioClip clip)
+    {
+        musicSource.clip = clip;
+        musicSource.Play();
     }
 
 }
