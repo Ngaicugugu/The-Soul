@@ -15,4 +15,4 @@ MonoBehaviour:
   id: 2
   attackDamage: 30
   itemImage: {fileID: 21300000, guid: cade239b1a27b2340914be4f4b973041, type: 3}
-  unlockExp: 35
+  unlockExp: 150

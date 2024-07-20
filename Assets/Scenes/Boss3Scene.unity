@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 41566042}
   - component: {fileID: 41566044}
   - component: {fileID: 41566043}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ObjectTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6347,9 +6347,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69c2eb151adb3944db4a917c18020726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2000
+  health: 50000
   experiencePrefab: {fileID: 5348376920146368172, guid: 1d1449364104dc84d87e6b3e14a5ac11, type: 3}
-  experienceValue: 1
+  experienceValue: 5
   doorPrefab: {fileID: 4428462990588034481, guid: 183eea5f38e769e438889e9fcab39324, type: 3}
   bossNumber: 3
 --- !u!1 &910591537
@@ -8916,7 +8916,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1568954090}
   - component: {fileID: 1568954089}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ObjectGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}

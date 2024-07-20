@@ -13,11 +13,11 @@ EditorBuildSettings:
     guid: 279d8ef7095f1324ab3137b875101be6
   - enabled: 1
     path: Assets/Scenes/Boss1Scene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    guid: f8f5cce3fe904b945b8783435539a958
   - enabled: 1
     path: Assets/Scenes/Boss2Scene.unity
-    guid: b9fbbc77691bce6459f6fbaebdc844dc
+    guid: 23dc3d51adb40da41b864b4f2f5bc2e0
   - enabled: 1
     path: Assets/Scenes/Boss3Scene.unity
-    guid: 5d5443b382ebb7941a53307ec1b67cba
+    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

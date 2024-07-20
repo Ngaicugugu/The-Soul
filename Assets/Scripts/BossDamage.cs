@@ -4,7 +4,6 @@ using UnityEngine;
 public class BossDamage : MonoBehaviour
 {
     [SerializeField] private int attackDamage = 20;
-
     [SerializeField] private Vector3 attackOffset;
     [SerializeField] private float attackRange = 1f;
     [SerializeField] private LayerMask attackMask;
@@ -22,6 +21,7 @@ public class BossDamage : MonoBehaviour
             colInfo.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
         }
     }
+
 
     public void SkillOn()
     {

@@ -15,4 +15,4 @@ MonoBehaviour:
   id: 6
   attackDamage: 200
   itemImage: {fileID: 21300000, guid: 513f2aa6b7e8b044eb9c23aeb527866d, type: 3}
-  unlockExp: 500
+  unlockExp: 2100
