@@ -91,8 +91,6 @@ public class PlayerController : MonoBehaviour
             case State.GameOver:
                 SetLayerToDefault();
                 break;
-
-                
         }
 
     }
